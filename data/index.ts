@@ -1,6 +1,7 @@
+import type { Lang, PortfolioData } from "./types";
+
 import { fr, defaultLang } from "./fr";
 import { en } from "./en";
-import type { Lang, PortfolioData } from "./types";
 
 export const DATASETS: Record<Lang, PortfolioData> = { fr, en };
 

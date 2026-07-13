@@ -5,7 +5,6 @@ import React, {
     useCallback,
 } from "react";
 import { addToast } from "@heroui/react";
-import emailjs from "@emailjs/browser";
 
 import { ContactFormData, ContactPageState } from "@/components/contact/types";
 import { PageHeader } from "@/components/page-header";
@@ -13,12 +12,6 @@ import { ContactCard } from "@/components/contact/contact-card";
 import { ContactForm } from "@/components/contact/contact-form";
 import { ContactMap } from "@/components/contact/contact-map";
 import { useData, useUI } from "@/lib/i18n";
-
-const EMAIL_CONFIG = {
-  serviceId: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
-  templateId: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
-  publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
-};
 
 const ContactPage: React.FC = () => {
   const { contact, morphingTexts } = useData();
@@ -34,35 +27,22 @@ const ContactPage: React.FC = () => {
     async (formData: ContactFormData): Promise<void> => {
       setState((prev) => ({ ...prev, isSubmitting: true, error: null }));
 
-      const missingVars = Object.entries(EMAIL_CONFIG)
-        .filter(([_, value]) => !value)
-        .map(([key]) => `NEXT_PUBLIC_EMAILJS_${key.toUpperCase().replace(/([A-Z])/g, "_$1")}`);
-
-      if (missingVars.length > 0) {
-        console.error("Email configuration is incomplete:", missingVars);
-        addToast({
-          title: contactUI.toast.errorTitle,
-          description: contactUI.toast.configError,
-          color: "danger",
-        });
-        setState((prev) => ({ ...prev, isSubmitting: false }));
-        return;
-      }
-
       try {
-        const templateParams = {
-          from_name: formData.name,
-          from_email: formData.email,
-          subject: formData.subject,
-          message: formData.message,
-        };
+        const response = await fetch("/api/contact", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        });
 
-        await emailjs.send(
-          EMAIL_CONFIG.serviceId!,
-          EMAIL_CONFIG.templateId!,
-          templateParams,
-          EMAIL_CONFIG.publicKey!,
-        );
+        if (!response.ok) {
+          const data = await response.json().catch(() => ({}));
+
+          throw new Error(
+            data.error || "Failed to send message. Please try again later.",
+          );
+        }
 
         setState((prev) => ({ ...prev, isSuccess: true }));
         addToast({
@@ -86,7 +66,7 @@ const ContactPage: React.FC = () => {
         setState((prev) => ({ ...prev, isSubmitting: false }));
       }
     },
-    [],
+    [contactUI.toast],
   );
 
   const handleReset = useCallback(() => {

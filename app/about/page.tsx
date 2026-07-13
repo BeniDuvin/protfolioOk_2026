@@ -25,25 +25,25 @@ export default function AboutPage() {
         title={profile.title}
       />
 
-      <EducationTimeline title={sectionTitles.education} education={education} />
+      <EducationTimeline education={education} title={sectionTitles.education} />
       <ExperienceTimeline
-        title={sectionTitles.experience}
         experience={experience}
+        title={sectionTitles.experience}
       />
       <CertificationTimeline
-        title={sectionTitles.certifications}
         certifications={certifications}
+        title={sectionTitles.certifications}
       />
-      <Skills title={sectionTitles.skills} categories={skills.categories} />
+      <Skills categories={skills.categories} title={sectionTitles.skills} />
       <LanguagesSection
-        title={sectionTitles.languages}
         description={languages.description}
         items={languages.items}
+        title={sectionTitles.languages}
       />
       <InvolvementSection
-        title={sectionTitles.involvement}
         description={involvement.sectionDescription}
         items={involvement.items}
+        title={sectionTitles.involvement}
       />
     </section>
   );

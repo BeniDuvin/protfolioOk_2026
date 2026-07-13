@@ -17,11 +17,11 @@ export const LanguagesSection = ({
   items,
 }: LanguagesSectionProps) => (
   <motion.div
+    className="mb-20"
     initial={{ opacity: 0, y: 40 }}
     transition={{ duration: 0.6 }}
     viewport={{ once: true }}
     whileInView={{ opacity: 1, y: 0 }}
-    className="mb-20"
   >
     <SectionHeader icon="lucide:languages" title={title} />
     {description && (

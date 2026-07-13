@@ -1,9 +1,10 @@
 "use client";
 
+import type { Lang, PortfolioData, UIStrings } from "@/data/types";
+
 import * as React from "react";
 
 import { DEFAULT_LANG, getDATA } from "@/data";
-import type { Lang, PortfolioData, UIStrings } from "@/data/types";
 
 interface LanguageContextValue {
   lang: Lang;
