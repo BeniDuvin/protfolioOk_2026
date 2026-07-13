@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 import { ToastProvider } from "@heroui/react";
 
+import { LanguageProvider } from "@/lib/i18n";
+
 const NextThemesProvider = dynamic(
   () =>
     import("next-themes").then(({ ThemeProvider }) => ThemeProvider),
@@ -33,7 +35,9 @@ export function Providers({ children, themeProps }: ProvidersProps) {
   return (
     <HeroUIProvider navigate={router.push}>
       <ToastProvider />
-      <NextThemesProvider {...themeProps}>{children}</NextThemesProvider>
+      <NextThemesProvider {...themeProps}>
+        <LanguageProvider>{children}</LanguageProvider>
+      </NextThemesProvider>
     </HeroUIProvider>
   );
 }

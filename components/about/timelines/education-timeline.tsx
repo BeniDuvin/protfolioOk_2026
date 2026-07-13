@@ -5,15 +5,11 @@ import { motion } from "framer-motion";
 import { SectionHeader } from "@/components/about/section-header";
 import { TimelineItem } from "@/components/about/timelines/timeline-item";
 import { containerVariants, itemVariants } from "@/components/about/variants";
-import { EducationItems } from "@/components/about/types";
+import { EducationItemProps } from "@/components/about/types";
 
-interface EducationTimelineProps {
-  education: EducationItems;
-}
-
-export const EducationTimeline = ({ education }: EducationTimelineProps) => (
+export const EducationTimeline = ({ title, education }: EducationItemProps) => (
   <div className="mb-20">
-    <SectionHeader icon="mdi:school-outline" title="Education" />
+    <SectionHeader icon="mdi:school-outline" title={title} />
 
     <motion.ol
       className="relative ml-6"

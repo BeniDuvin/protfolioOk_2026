@@ -5,11 +5,14 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import { ContactMapProps } from "../types";
 import { MapSkeleton } from "@/components/contact/contact-map/map-skeleton";
+import { useUI } from "@/lib/i18n";
 
 export const ContactMap: React.FC<ContactMapProps> = ({
   src,
   className = "",
 }) => {
+  const { contact } = useUI();
+  const { mapTitle, mapError } = contact;
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -53,10 +56,10 @@ export const ContactMap: React.FC<ContactMapProps> = ({
             initial={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <div className="text-center space-y-2">
-              <div className="text-default-400 text-lg">📍</div>
-              <p className="text-default-500 text-sm">Unable to load map</p>
-            </div>
+              <div className="text-center space-y-2">
+               <div className="text-default-400 text-lg">📍</div>
+               <p className="text-default-500 text-sm">{mapError}</p>
+             </div>
           </motion.div>
         ) : (
           <motion.iframe
@@ -70,7 +73,7 @@ export const ContactMap: React.FC<ContactMapProps> = ({
             style={{
               visibility: isLoaded ? "visible" : "hidden",
             }}
-            title="Location Map"
+            title={mapTitle}
             transition={{ duration: 0.5, ease: "easeOut" }}
             onError={handleError}
             onLoad={handleLoad}

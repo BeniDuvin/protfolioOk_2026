@@ -12,7 +12,7 @@ import { PageHeader } from "@/components/page-header";
 import { ContactCard } from "@/components/contact/contact-card";
 import { ContactForm } from "@/components/contact/contact-form";
 import { ContactMap } from "@/components/contact/contact-map";
-import { DATA } from "@/data";
+import { useData, useUI } from "@/lib/i18n";
 
 const EMAIL_CONFIG = {
   serviceId: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
@@ -21,6 +21,9 @@ const EMAIL_CONFIG = {
 };
 
 const ContactPage: React.FC = () => {
+  const { contact, morphingTexts } = useData();
+  const { contact: contactUI } = useUI();
+
   const [state, setState] = useState<ContactPageState>({
     isSubmitting: false,
     isSuccess: false,
@@ -38,8 +41,8 @@ const ContactPage: React.FC = () => {
       if (missingVars.length > 0) {
         console.error("Email configuration is incomplete:", missingVars);
         addToast({
-          title: "Failed to Send Message",
-          description: "Email configuration is incomplete. Please check environment variables.",
+          title: contactUI.toast.errorTitle,
+          description: contactUI.toast.configError,
           color: "danger",
         });
         setState((prev) => ({ ...prev, isSubmitting: false }));
@@ -63,9 +66,8 @@ const ContactPage: React.FC = () => {
 
         setState((prev) => ({ ...prev, isSuccess: true }));
         addToast({
-          title: "Message Sent Successfully",
-          description:
-            "Thank you for your message! I'll get back to you soon.",
+          title: contactUI.toast.successTitle,
+          description: contactUI.toast.successBody,
           color: "success",
         });
       } catch (error) {
@@ -76,7 +78,7 @@ const ContactPage: React.FC = () => {
 
         setState((prev) => ({ ...prev, error: errorMessage }));
         addToast({
-          title: "Failed to Send Message",
+          title: contactUI.toast.errorTitle,
           description: errorMessage,
           color: "danger",
         });
@@ -97,10 +99,10 @@ const ContactPage: React.FC = () => {
 
   return (
     <section className="py-20">
-      <PageHeader texts={DATA.morphingTexts.contact} />
+      <PageHeader texts={morphingTexts.contact} />
       <div className="container mx-auto px-4">
-        <ContactCard heading={DATA.contact.heading}>
-          <ContactMap src={DATA.contact.location.mapSrc} />
+        <ContactCard heading={contact.heading}>
+          <ContactMap src={contact.location.mapSrc} />
           <ContactForm
             isSubmitting={state.isSubmitting}
             isSuccess={state.isSuccess}

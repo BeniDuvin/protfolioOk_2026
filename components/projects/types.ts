@@ -10,7 +10,7 @@ export interface Project {
   readonly gallery: readonly string[];
   tech: readonly {
     name: string;
-    icon: string;
+    icon?: string;
   }[];
 }
 

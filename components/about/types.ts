@@ -1,3 +1,10 @@
+import type {
+  CertificationItem,
+  EducationItem,
+  ExperienceItem,
+  SkillCategory,
+} from "@/data/types";
+
 export interface ProfileCardProps {
   image: string;
   name: string;
@@ -14,30 +21,29 @@ export interface SectionHeaderProps {
 export interface TimelineItemProps {
   title: string;
   date: string;
-  description: string;
+  description: string | string[];
   variants?: any;
   delay?: number;
 }
 
-export interface EducationItem {
-  readonly title: string;
-  readonly date: string;
-  readonly description: string;
-  readonly icon?: string;
+export interface EducationItemProps {
+  title: string;
+  education: readonly EducationItem[];
 }
 
-export interface ExperienceItem extends EducationItem {}
-
-export interface TechItem {
-  readonly name: string;
-  readonly icon: string;
+export interface ExperienceTimelineProps {
+  title: string;
+  experience: readonly ExperienceItem[];
 }
 
-export interface TechCategory {
-  readonly description: string;
-  readonly tools: readonly TechItem[];
+export interface CertificationTimelineProps {
+  title: string;
+  certifications: readonly CertificationItem[];
 }
 
-export type EducationItems = readonly EducationItem[];
-export type ExperienceItems = readonly ExperienceItem[];
-export type TechCategories = Readonly<Record<string, TechCategory>>;
+export interface SkillsProps {
+  title: string;
+  categories: readonly SkillCategory[];
+}
+
+export type { EducationItem, ExperienceItem, CertificationItem, SkillCategory };

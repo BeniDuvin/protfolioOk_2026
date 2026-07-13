@@ -14,12 +14,15 @@ import { Icon } from "@iconify/react";
 
 import ImageGallery from "@/components/image-gallery";
 import { ProjectModalProps } from "@/components/projects/types";
+import { useUI } from "@/lib/i18n";
 
 export const ProjectModal = ({
   isOpen,
   onClose,
   project,
 }: ProjectModalProps) => {
+  const { projects } = useUI();
+
   if (!project) return null;
 
   return (
@@ -51,7 +54,7 @@ export const ProjectModal = ({
             {project.tech && (
               <div className="mb-6">
                 <h4 className="font-semibold mb-6 text-foreground">
-                  Technologies Used:
+                  {projects.technologiesUsed}
                 </h4>
                 <AvatarGroup>
                   {project.tech.map(({ name, icon }) => (
@@ -63,7 +66,7 @@ export const ProjectModal = ({
                           base: "bg-transparent",
                           icon: "text-foreground dark:text-foreground-dark",
                         }}
-                        icon={<Icon icon={icon} width={25} />}
+                        {...(icon ? { icon: <Icon icon={icon} width={25} /> } : {})}
                       />
                     </Tooltip>
                   ))}
@@ -76,7 +79,7 @@ export const ProjectModal = ({
           <div className="flex justify-end mb-4 px-6 gap-3">
             {project.github && (
               <a
-                aria-label="View on GitHub"
+                aria-label={projects.viewOnGitHub}
                 className="text-foreground-500 hover:text-foreground transition"
                 href={project.github}
                 rel="noopener noreferrer"
@@ -87,7 +90,7 @@ export const ProjectModal = ({
             )}
             {project.live && (
               <a
-                aria-label="View Live Project"
+                aria-label={projects.viewLive}
                 className="text-foreground-500 hover:text-foreground transition"
                 href={project.live}
                 rel="noopener noreferrer"
@@ -106,7 +109,7 @@ export const ProjectModal = ({
             variant="light"
             onClick={onClose}
           >
-            Close
+            {projects.close}
           </Button>
         </ModalFooter>
       </ModalContent>

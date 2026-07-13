@@ -1,13 +1,18 @@
+"use client";
+
 import { memo } from "react";
 import { Card, CardBody, CardFooter, Button, Image } from "@heroui/react";
 import { Icon } from "@iconify/react";
 
 import { ProjectCardProps } from "@/components/projects/types";
+import { useUI } from "@/lib/i18n";
 
 export const ProjectCard = memo(function ProjectCard({
   project,
   onViewDetails,
 }: ProjectCardProps) {
+  const { projects } = useUI();
+
   return (
     <Card
       isFooterBlurred
@@ -58,14 +63,14 @@ export const ProjectCard = memo(function ProjectCard({
             {project.description}
           </p>
           <Button
-            aria-label="View Details"
+            aria-label={projects.viewDetails}
             className="w-full md:w-auto border-cyan-400 text-cyan-300 hover:bg-cyan-400/10 transition-colors"
             color="primary"
             endContent={<Icon icon="lucide:arrow-right" />}
             variant="bordered"
             onClick={onViewDetails}
           >
-            View Details
+            {projects.viewDetails}
           </Button>
         </div>
       </CardBody>

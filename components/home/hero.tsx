@@ -7,19 +7,13 @@ import { Button, Link } from "@heroui/react";
 import { Icon } from "@iconify/react";
 
 import { Hole } from "@/components/backgrounds/hole/hole";
-import { DATA } from "@/data";
+import { useData, useUI } from "@/lib/i18n";
 
-export const HeroSection = ({
-  showBackground = true,
-  name = DATA.home.hero.name,
-  title = DATA.home.hero.title,
-  subtitle = DATA.home.hero.subtitle,
-}: {
-  showBackground?: boolean;
-  name?: string;
-  title?: string;
-  subtitle?: string;
-}) => {
+export const HeroSection = () => {
+  const { home } = useData();
+  const { hero: heroUI } = useUI();
+  const { name, title, subtitle } = home.hero;
+
   const scrollToWork = (_e: PressEvent) => {
     const workSection = document.getElementById("work-section");
 
@@ -30,7 +24,7 @@ export const HeroSection = ({
 
   return (
     <section className="min-h-[calc(100vh-64px)] flex items-center justify-center relative overflow-hidden bg-background">
-      {showBackground && <Hole />}
+      <Hole />
       <div className="absolute inset-0 bg-gradient-to-b from-primary-500/10 to-transparent" />
       <div className="container mx-auto px-4 z-10">
         <motion.div
@@ -45,8 +39,7 @@ export const HeroSection = ({
             initial={{ opacity: 0, y: 20 }}
             transition={{ delay: 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            Hi, I&apos;m {name} &mdash; I design &amp; code modern web
-            experiences.
+            {heroUI.greeting} {name} &mdash; {heroUI.headline}
           </motion.h1>
 
           <motion.p
@@ -66,24 +59,24 @@ export const HeroSection = ({
           >
             <Link
               download
-              aria-label="Download CV in PDF format"
+              aria-label={heroUI.downloadCV}
               className="w-full sm:w-auto"
               href="/new CV.pdf"
             >
               <Button
                 fullWidth
-                aria-label="Downoald CV"
+                aria-label={heroUI.downloadCV}
                 color="primary"
                 endContent={<Icon icon="lucide:download" />}
                 size="lg"
                 variant="shadow"
               >
-                Download CV
+                {heroUI.downloadCV}
               </Button>
             </Link>
             <Button
               fullWidth
-              aria-label="View Work"
+              aria-label={heroUI.viewWork}
               className="w-full sm:w-auto"
               color="primary"
               endContent={<Icon icon="lucide:arrow-down" />}
@@ -91,7 +84,7 @@ export const HeroSection = ({
               variant="bordered"
               onPress={scrollToWork}
             >
-              View Work
+              {heroUI.viewWork}
             </Button>
           </motion.div>
         </motion.div>

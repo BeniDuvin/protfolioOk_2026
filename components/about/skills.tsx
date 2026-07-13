@@ -1,55 +1,46 @@
 "use client";
 import { motion } from "framer-motion";
-import { Icon } from "@iconify/react";
-import { Accordion, AccordionItem } from "@heroui/react";
+import { Chip } from "@heroui/react";
 
-import { OrbitingCircles } from "@/components/orbiting-circles";
 import { SectionHeader } from "@/components/about/section-header";
-import { capitalize } from "@/lib/utils";
-import { TechCategories } from "@/components/about/types";
+import { SkillsProps } from "@/components/about/types";
 
-interface SkillsProps {
-  tech: TechCategories;
-}
-
-export const Skills = ({ tech }: SkillsProps) => (
+export const Skills = ({ title, categories }: SkillsProps) => (
   <motion.div
     initial={{ opacity: 0, y: 40 }}
     transition={{ duration: 0.6 }}
     viewport={{ once: true }}
     whileInView={{ opacity: 1, y: 0 }}
   >
-    <SectionHeader icon="mdi:tools" title="Skills" />
+    <SectionHeader icon="mdi:tools" title={title} />
 
-    <Accordion selectionMode="multiple" variant="bordered">
-      {Object.entries(tech).map(([category, { description, tools }]) => (
-        <AccordionItem
-          key={category}
-          aria-label={category}
-          title={capitalize(category)}
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {categories.map((category) => (
+        <div
+          key={category.title}
+          className="p-5 rounded-large border border-divider bg-content1"
         >
-          <p className="mb-4 text-sm text-muted-foreground">{description}</p>
-
-          <div className="relative h-[300px] w-full">
-            <OrbitingCircles
-              className="h-full w-full [&>div]:hover:scale-110 [&>div]:hover:text-primary-500"
-              duration={20}
-              radius={120}
-            >
-              {tools.map((tool) => (
-                <div key={tool.name}>
-                  <Icon
-                    className="transition-all duration-300"
-                    height={24}
-                    icon={tool.icon}
-                    width={24}
-                  />
-                </div>
-              ))}
-            </OrbitingCircles>
+          <h3 className="text-lg font-semibold mb-1">{category.title}</h3>
+          {category.description && (
+            <p className="mb-4 text-sm text-muted-foreground">
+              {category.description}
+            </p>
+          )}
+          <div className="flex flex-wrap gap-2">
+            {category.tools.map((tool) => (
+              <Chip
+                key={tool.name}
+                className="bg-background text-foreground"
+                radius="sm"
+                size="sm"
+                variant="flat"
+              >
+                {tool.name}
+              </Chip>
+            ))}
           </div>
-        </AccordionItem>
+        </div>
       ))}
-    </Accordion>
+    </div>
   </motion.div>
 );

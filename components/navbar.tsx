@@ -16,13 +16,17 @@ import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
 
 import { ThemeSwitcher } from "@/components/theme-switcher";
-import { DATA } from "@/data";
+import { LanguageSwitcher } from "@/components/language-switcher";
+import { useData, useUI } from "@/lib/i18n";
 
 export const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  const menuItems = DATA.navigation;
+  const { navigation } = useData();
+  const { nav } = useUI();
+
+  const menuItems = navigation;
 
   return (
     <Navbar
@@ -39,13 +43,13 @@ export const Navigation = () => {
             initial={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.5 }}
           >
-            <Link
-              className="font-bold text-inherit text-xl bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent"
-              href="/"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Portfolio
-            </Link>
+              <Link
+                className="font-bold text-inherit text-xl bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent"
+                href="/"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {nav.brand}
+              </Link>
           </motion.div>
         </NavbarBrand>
 
@@ -74,11 +78,15 @@ export const Navigation = () => {
         </NavbarContent>
 
         <NavbarItem>
+          <LanguageSwitcher />
+        </NavbarItem>
+
+        <NavbarItem>
           <ThemeSwitcher />
         </NavbarItem>
 
         <NavbarMenuToggle
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          aria-label={isMenuOpen ? nav.closeMenu : nav.openMenu}
           className="sm:hidden"
         />
       </NavbarContent>

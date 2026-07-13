@@ -7,11 +7,12 @@ import { ProjectCard } from "@/components/project-card";
 import { ProjectModal } from "@/components/project-modal";
 import { GradientText } from "@/components/textAnimations/gradient-text";
 import { Project } from "@/components/projects/types";
-import { DATA } from "@/data";
+import { useData } from "@/lib/i18n";
 
 export const WorkSection = () => {
-  const { work } = DATA.projects;
-  const { sectionTitle, sectionDescription } = DATA.projects;
+  const { projects } = useData();
+  const { work } = projects;
+  const { sectionTitle, sectionDescription } = projects;
 
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 

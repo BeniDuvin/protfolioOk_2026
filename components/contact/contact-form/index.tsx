@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ContactFormProps } from "@/components/contact/types";
 import { useContactForm } from "@/hooks/use-contact-form";
 import { SuccessMessage } from "@/components/contact/contact-form/success-message";
+import { useUI } from "@/lib/i18n";
 
 export const ContactForm: React.FC<ContactFormProps> = ({
   onSubmit,
@@ -15,6 +16,9 @@ export const ContactForm: React.FC<ContactFormProps> = ({
   isSuccess,
   onReset,
 }) => {
+  const { contact } = useUI();
+  const { form } = contact;
+
   const {
     formData,
     errors,
@@ -68,9 +72,9 @@ export const ContactForm: React.FC<ContactFormProps> = ({
             isRequired
             errorMessage={errors.name}
             isInvalid={!!errors.name}
-            label="Name"
+            label={form.name}
             name="name"
-            placeholder="Your full name"
+            placeholder={form.namePlaceholder}
             startContent={<Icon icon="lucide:user" />}
             value={formData.name}
             variant="bordered"
@@ -82,9 +86,9 @@ export const ContactForm: React.FC<ContactFormProps> = ({
             isRequired
             errorMessage={errors.email}
             isInvalid={!!errors.email}
-            label="Email"
+            label={form.email}
             name="email"
-            placeholder="your.email@example.com"
+            placeholder={form.emailPlaceholder}
             startContent={<Icon icon="lucide:mail" />}
             type="email"
             value={formData.email}
@@ -98,9 +102,9 @@ export const ContactForm: React.FC<ContactFormProps> = ({
           isRequired
           errorMessage={errors.subject}
           isInvalid={!!errors.subject}
-          label="Subject"
+          label={form.subject}
           name="subject"
-          placeholder="Project type or inquiry topic"
+          placeholder={form.subjectPlaceholder}
           startContent={<Icon icon="lucide:briefcase" />}
           value={formData.subject}
           variant="bordered"
@@ -112,11 +116,11 @@ export const ContactForm: React.FC<ContactFormProps> = ({
           isRequired
           errorMessage={errors.message}
           isInvalid={!!errors.message}
-          label="Message"
+          label={form.message}
           maxRows={8}
           minRows={4}
           name="message"
-          placeholder="Tell me about your project, timeline, and any specific requirements..."
+          placeholder={form.messagePlaceholder}
           value={formData.message}
           variant="bordered"
           onBlur={() => handleInputBlur("message", formData.message)}
@@ -125,7 +129,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
 
         <div className="flex flex-col gap-4">
           <Button
-            aria-label="Sending"
+            aria-label={form.sendAria}
             className="w-full h-14 text-base font-medium"
             color="primary"
             isDisabled={!isValid || isSubmitting}
@@ -138,11 +142,11 @@ export const ContactForm: React.FC<ContactFormProps> = ({
             }
             type="submit"
           >
-            {isSubmitting ? "Sending..." : "Send Message"}
+            {isSubmitting ? form.sending : form.submit}
           </Button>
 
           <Button
-            aria-label="Reset Form"
+            aria-label={form.resetAria}
             className="w-full h-14 text-base"
             color="default"
             isDisabled={isSubmitting}
@@ -156,7 +160,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
             variant="bordered"
             onPress={resetForm}
           >
-            Reset Form
+            {form.reset}
           </Button>
         </div>
       </motion.form>
