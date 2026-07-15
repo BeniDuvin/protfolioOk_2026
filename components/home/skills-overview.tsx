@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Card, CardBody, Chip } from "@heroui/react";
-import { Icon } from "@iconify/react";
+import { Icon } from "@/lib/icon";
 
 import { GradientText } from "@/components/textAnimations/gradient-text";
 import { useData } from "@/lib/i18n";

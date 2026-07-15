@@ -1,6 +1,6 @@
 "use client";
 
-import { Icon } from "@iconify/react";
+import { Icon } from "@/lib/icon";
 
 import { SectionHeaderProps } from "@/components/about/types";
 

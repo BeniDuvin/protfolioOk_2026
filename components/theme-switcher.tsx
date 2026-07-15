@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@heroui/react";
-import { Icon } from "@iconify/react";
+import { Icon } from "@/lib/icon";
 import { useTheme } from "@heroui/use-theme";
 import { motion } from "framer-motion";
 

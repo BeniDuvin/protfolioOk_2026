@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { Icon } from "@iconify/react";
+import { Icon } from "@/lib/icon";
 
 import { SectionHeader } from "@/components/about/section-header";
 import { LanguageItem } from "@/data/types";

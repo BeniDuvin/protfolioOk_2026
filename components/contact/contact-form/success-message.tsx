@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Icon } from "@iconify/react";
+import { Icon } from "@/lib/icon";
 import { Button, Card, CardBody } from "@heroui/react";
 
 import { useUI } from "@/lib/i18n";

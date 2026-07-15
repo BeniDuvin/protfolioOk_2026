@@ -204,7 +204,7 @@ export const en: PortfolioData = {
       name: "Béni Duvin BANTSIMBA IBINDA",
       title: "Full-stack developer & tech entrepreneur",
       subtitle:
-        "Full-stack developer and tech entrepreneur based in Brazzaville, Congo. Founder of BENSOFTCG, building and commercializing software solutions tailored to African realities. Passionate about fintech, AI, and the digitalization of institutions.",
+        "Based in Brazzaville, Congo. Founder of BENSOFTCG, building and commercializing software solutions tailored to African realities. Passionate about fintech, AI, and the digitalization of institutions.",
     },
     skills: {
       sectionTitle: "Skills & Expertise",
@@ -235,7 +235,7 @@ export const en: PortfolioData = {
       image:
         "beni.jpeg",
       description: [
-        "Full-stack developer and tech entrepreneur based in Brazzaville, Congo. Founder of BENSOFTCG, building and commercializing software solutions tailored to African realities.",
+        "Based in Brazzaville, Congo. Founder of BENSOFTCG, building and commercializing software solutions tailored to African realities.",
         "Passionate about fintech, AI, and the digitalization of institutions, I rely on modern technologies (NestJS, Next.js, FastAPI, PostgreSQL) to build concrete and useful products.",
         "Engaged with the Congolese tech community, I share my knowledge and support SMEs in their digital transformation.",
       ],

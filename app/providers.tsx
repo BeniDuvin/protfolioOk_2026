@@ -5,16 +5,10 @@ import type { ThemeProviderProps } from "next-themes";
 import * as React from "react";
 import { HeroUIProvider } from "@heroui/system";
 import { useRouter } from "next/navigation";
-import dynamic from "next/dynamic";
 import { ToastProvider } from "@heroui/react";
 
 import { LanguageProvider } from "@/lib/i18n";
-
-const NextThemesProvider = dynamic(
-  () =>
-    import("next-themes").then(({ ThemeProvider }) => ThemeProvider),
-  { ssr: false },
-);
+import { ThemeProvider } from "@/lib/theme-provider";
 
 export interface ProvidersProps {
   children: React.ReactNode;
@@ -35,9 +29,16 @@ export function Providers({ children, themeProps }: ProvidersProps) {
   return (
     <HeroUIProvider navigate={router.push}>
       <ToastProvider />
-      <NextThemesProvider {...themeProps}>
+        <ThemeProvider
+          attribute={
+            typeof themeProps?.attribute === "string"
+              ? themeProps.attribute
+              : "class"
+          }
+          defaultTheme={themeProps?.defaultTheme ?? "dark"}
+        >
         <LanguageProvider>{children}</LanguageProvider>
-      </NextThemesProvider>
+      </ThemeProvider>
     </HeroUIProvider>
   );
 }

@@ -2,7 +2,7 @@
 
 import React, { useCallback } from "react";
 import { Input, Textarea, Button } from "@heroui/react";
-import { Icon } from "@iconify/react";
+import { Icon } from "@/lib/icon";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { ContactFormProps } from "@/components/contact/types";

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import dynamic from "next/dynamic";
 import {
   Navbar,
   NavbarBrand,
@@ -12,12 +13,16 @@ import {
   NavbarMenu,
   NavbarMenuItem,
 } from "@heroui/react";
-import { Icon } from "@iconify/react";
+import { Icon } from "@/lib/icon";
 import { motion } from "framer-motion";
 
-import { ThemeSwitcher } from "@/components/theme-switcher";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { useData, useUI } from "@/lib/i18n";
+
+const ThemeSwitcher = dynamic(
+  () => import("@/components/theme-switcher").then((m) => m.ThemeSwitcher),
+  { ssr: false },
+);
 
 export const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

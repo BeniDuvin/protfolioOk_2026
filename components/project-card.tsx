@@ -2,7 +2,7 @@
 
 import { memo } from "react";
 import { Card, CardBody, CardFooter, Button, Image } from "@heroui/react";
-import { Icon } from "@iconify/react";
+import { Icon } from "@/lib/icon";
 
 import { ProjectCardProps } from "@/components/projects/types";
 import { useUI } from "@/lib/i18n";

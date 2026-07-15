@@ -4,7 +4,7 @@ import type { PressEvent } from "@react-aria/interactions";
 
 import { motion } from "framer-motion";
 import { Button, Link } from "@heroui/react";
-import { Icon } from "@iconify/react";
+import { Icon } from "@/lib/icon";
 
 import { Hole } from "@/components/backgrounds/hole/hole";
 import { useData, useUI } from "@/lib/i18n";

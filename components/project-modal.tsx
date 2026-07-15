@@ -10,7 +10,7 @@ import {
   Tooltip,
   ScrollShadow,
 } from "@heroui/react";
-import { Icon } from "@iconify/react";
+import { Icon } from "@/lib/icon";
 
 import ImageGallery from "@/components/image-gallery";
 import { ProjectModalProps } from "@/components/projects/types";

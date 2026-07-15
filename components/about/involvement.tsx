@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { Card, CardBody } from "@heroui/react";
-import { Icon } from "@iconify/react";
+import { Icon } from "@/lib/icon";
 
 import { SectionHeader } from "@/components/about/section-header";
 import { InvolvementItem } from "@/data/types";

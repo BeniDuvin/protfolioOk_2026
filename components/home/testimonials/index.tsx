@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@heroui/react";
-import { Icon } from "@iconify/react";
+import { Icon } from "@/lib/icon";
 
 import { useIsMobile } from "@/hooks/use-mobile";
 import { GradientText } from "@/components/textAnimations/gradient-text";

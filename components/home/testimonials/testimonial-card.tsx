@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { Card, CardBody, Avatar } from "@heroui/react";
-import { Icon } from "@iconify/react";
+import { Icon } from "@/lib/icon";
 
 interface testimonialCardProps {
   name: string;
