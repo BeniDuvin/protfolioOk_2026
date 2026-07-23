@@ -143,7 +143,7 @@ const projects: PortfolioData["projects"]["work"] = [
       "falanka.png-1",
       "falanka.png-2",
     ],
-    github: "https://github.com",
+    github: "https://github.com/BeniDuvin",
     live: "https://benibantsimba.bensoftcg.com",
       tech: [
         { name: "NestJS", icon: "mdi:server" },
@@ -168,7 +168,7 @@ const projects: PortfolioData["projects"]["work"] = [
       "softeduc.jpeg-1",
       "softeduc.jpeg-2",
     ],
-    github: "https://github.com",
+    github: "https://github.com/BeniDuvin",
     live: "https://benibantsimba.bensoftcg.com",
       tech: [
         { name: "WinDev 25", icon: "mdi:monitor" },
@@ -191,7 +191,7 @@ const projects: PortfolioData["projects"]["work"] = [
       "pratic.png-1",
       "pratic.png-2",
     ],
-    github: "https://github.com",
+    github: "https://github.com/BeniDuvin",
     live: "https://benibantsimba.bensoftcg.com",
       tech: [
         { name: "FastAPI", icon: "mdi:api" },
