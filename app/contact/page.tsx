@@ -38,10 +38,16 @@ const ContactPage: React.FC = () => {
 
         if (!response.ok) {
           const data = await response.json().catch(() => ({}));
+          const serverError =
+            data.error || "Failed to send message. Please try again later.";
+          const normalizedError =
+            serverError === "Please enter a valid email address"
+              ? "L'e-mail est erroné."
+              : serverError === "All fields are required"
+                ? "Tous les champs sont requis."
+                : "Une erreur est survenue lors de l'envoi du message.";
 
-          throw new Error(
-            data.error || "Failed to send message. Please try again later.",
-          );
+          throw new Error(normalizedError);
         }
 
         setState((prev) => ({ ...prev, isSuccess: true }));

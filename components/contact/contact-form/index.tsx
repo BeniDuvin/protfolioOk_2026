@@ -3,7 +3,7 @@
 import React, { useCallback } from "react";
 import { Input, Textarea, Button } from "@heroui/react";
 import { Icon } from "@/lib/icon";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 import { ContactFormProps } from "@/components/contact/types";
 import { useContactForm } from "@/hooks/use-contact-form";
@@ -24,6 +24,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
     errors,
     isValid,
     handleInputChange,
+    handleSubmit: validateAndSubmit,
     resetForm,
     validateField,
   } = useContactForm();
@@ -31,9 +32,9 @@ export const ContactForm: React.FC<ContactFormProps> = ({
   const handleFormSubmit = useCallback(
     async (e: React.FormEvent) => {
       e.preventDefault();
-      onSubmit(formData); // Pass formData directly to the onSubmit prop
+      await validateAndSubmit(onSubmit);
     },
-    [formData, onSubmit],
+    [validateAndSubmit, onSubmit],
   );
 
   const handleReset = useCallback(() => {
@@ -49,16 +50,11 @@ export const ContactForm: React.FC<ContactFormProps> = ({
   );
 
   if (isSuccess) {
-    return (
-      <AnimatePresence mode="wait">
-        <SuccessMessage onReset={handleReset} />
-      </AnimatePresence>
-    );
+    return <SuccessMessage onReset={handleReset} />;
   }
 
   return (
-    <AnimatePresence mode="wait">
-      <motion.form
+    <motion.form
         noValidate
         animate={{ opacity: 1, y: 0 }}
         className="space-y-6"
@@ -164,6 +160,5 @@ export const ContactForm: React.FC<ContactFormProps> = ({
           </Button>
         </div>
       </motion.form>
-    </AnimatePresence>
   );
 };

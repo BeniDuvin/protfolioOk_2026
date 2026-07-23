@@ -35,7 +35,7 @@ export const ContactMap: React.FC<ContactMapProps> = ({
       viewport={{ once: true }}
       whileInView={{ opacity: 1, y: 0 }}
     >
-      <AnimatePresence mode="wait">
+      <AnimatePresence mode="sync">
         {!isLoaded && !hasError && (
           <motion.div
             key="skeleton"
